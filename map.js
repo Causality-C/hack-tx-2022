@@ -30,6 +30,8 @@ class Map {
 
 }
 
+// testing
+
 m = new Map("map", 30.288405404040404, -97.73681904040404, (x, y) => console.log(x + " " + y))
 
 setTimeout(() => m.updateMap(0,0), 5000)
