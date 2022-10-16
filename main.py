@@ -1,8 +1,15 @@
 from flask import Flask, render_template, request
+from auth import auth
+from events import events
+from organization import organization
 import requests
 
 # What we use to render a template, aka our frontend
 app = Flask(__name__,template_folder="./")
+app.register_blueprint(organization, url_prefix="/organization")
+app.register_blueprint(events, url_prefix="/events")
+app.register_blueprint(auth, url_prefix="/auth")
+
 def getGeoLocation(location):
    query = f"https://nominatim.openstreetmap.org/search?q={location}&format=json"
    res = requests.get(query).json()

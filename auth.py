@@ -13,6 +13,10 @@ SALT = os.environ["JWT_SALT"]
 # Blueprints modularize code: define these routes
 auth = Blueprint("auth", __name__)
 
+@auth.get("/")
+def defaults():
+    return "no"
+
 
 @auth.route("/register", methods=["POST"])
 def signup():
@@ -36,8 +40,9 @@ def signup():
         "username": username,
         "email": email,
         "password": password_hashed,
-        "score": 0,
-        "games_played": 0,
+        "profile_pic": ":)",
+        "subbed_events": [],
+        "subbed_orgs": []
     }
     user_table.put_item(Item=user)
 
@@ -106,13 +111,16 @@ def login():
     # Check Password
     email = res["email"]
     password_check = res["password"]
+    subbed_events = res["subbed_events"]
+    subbed_orgs = res["subbed_orgs"]
+    profile_pic = res["profile_pic"]
 
     if password_check != password_hashed:
         return jsonify({"message": f"Incorrect Password"}), 400
 
     # Create token and return
     token = jwt.encode({"username": username, "email": email}, SALT, algorithm="HS256")
-    return jsonify({"username": username, "email": email, "token": token})
+    return jsonify({"username": username, "email": email, "token": token, "profile_pic" : profile_pic, "subbed_events" : subbed_events, "subbed_orgs" : subbed_orgs})
 
 
 @auth.route("/protected", methods=["POST"])
