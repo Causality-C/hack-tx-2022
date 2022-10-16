@@ -21,10 +21,11 @@
     getEvents()
     async function getEvents(){
         let url2 = "/events/user"
+
         let url = "/events/org/" + org_name
         let resTwo = await fetch(url2, {
             method: 'GET', // *GET, POST, PUT, DELETE, etc.
-            mode: 'same-origin', // no-cors, *cors, same-origin
+            mode: 'cors', // no-cors, *cors, same-origin
             headers: {
               'Content-Type': 'application/json',
               "Authorization": `Bearer ${localStorage.getItem("token")}`
@@ -37,6 +38,7 @@
               data
             }))
           })
+        console.log(resTwo)
         const subbedEvents = resTwo.data.subbed_events.map(data => data.uid)
         console.log(subbedEvents)
         let res = await fetch(url, {

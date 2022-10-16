@@ -137,7 +137,7 @@ def dumpOrganizationDatabase():
 @tokenRequired
 def getOrganizationsByUser(username):
     req =user_table.get_item(Key={"username":username})['Item']
-    return req['subbed_orgs']
+    return jsonify(req['subbed_orgs'])
 
 # Get the event details given an event id
 @organization.get("/event/<string:uid>")

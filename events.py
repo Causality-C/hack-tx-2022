@@ -15,6 +15,7 @@ events = Blueprint("events", __name__)
 # Get all events hosted by an organization
 @events.get("/org/<string:org>")
 def getOrganization(org):
+    print(org)
     res = org_table.get_item(Key={"orgname":org})['Item']
 
     # inefficient scan, but wtf it works anyways
@@ -45,7 +46,8 @@ def getEventsFromUser(username):
         'AttributeValueList': subbed_events,
         'ComparisonOperator': 'IN' }
     }
-)
+    )
+    print(response)
     return jsonify({"subbed_events":response['Items']})
 
 # Create an event
