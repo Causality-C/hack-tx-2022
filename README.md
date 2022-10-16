@@ -1,8 +1,17 @@
-# Checkedin Developer Guide
+# CheckedIn Developer Guide
 
-## What is Checkedin?
+## What is CheckedIn?
 
 Checkedin is a platform for organizers that enables a more decentralized check in process. Clients who are attending the event can check in once they are within a proximity of the event on a web application. As well, organizations can have a collection of events that clients can subscribe to and view.
+
+### Image Demonstrations
+![unknown1](https://user-images.githubusercontent.com/70402202/196046777-4e5787a7-3933-4e47-89f3-18a3298761e8.png)
+![1unknown](https://user-images.githubusercontent.com/70402202/196046778-fd1cd704-a400-42e9-b9bc-8eb2eae77360.png)
+![2unknown](https://user-images.githubusercontent.com/70402202/196046779-8639f8aa-ac81-4c3e-a960-92476d803573.png)
+![3unknown](https://user-images.githubusercontent.com/70402202/196046780-7096f425-db42-480c-b417-09f16d4f281e.png)
+![unknown](https://user-images.githubusercontent.com/70402202/196046781-0c900684-636c-4325-9858-80c1e15683b1.png)
+
+
 
 ## Overall Program Structure
 
