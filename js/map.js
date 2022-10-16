@@ -71,7 +71,7 @@ function deg2rad(deg) {
 }
 
 class Map {
-  constructor(containerName, long, lat, followUser, checkinCallback) {
+  constructor(containerName, long, lat, radius, followUser, checkinCallback) {
     this.map = new mapboxgl.Map({
       container: containerName, // container id
       // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
@@ -89,7 +89,7 @@ class Map {
       .setLngLat([long, lat])
       .setDraggable(!followUser)
       .addTo(this.map);
-    this.radius = 25;
+    this.radius = radius;
     this.checkinCallback = checkinCallback;
     this.marker.on("dragend", () => {
       if (this.map.isSourceLoaded("polygon")) {

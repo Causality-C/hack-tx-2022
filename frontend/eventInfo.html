@@ -83,8 +83,7 @@
             chked_list.appendChild(li)
           })
           let coords = res.data.location.split(",").map(data => parseFloat(data))
-          let map = new Map('map', coords[1], coords[0], false);
-
+          let map = new Map('map', coords[1], coords[0], res.data.radius, false);
     }
 </script>
 </html>

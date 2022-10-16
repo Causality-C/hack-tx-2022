@@ -121,9 +121,9 @@ async function getCoordinates(){
 
     // Calls our API 
     const res = await fetch('/location/' + str).then(data => data.json())
-
+    console.log(res);
     if(map == undefined){
-        map = new Map("map", res[0]['lon'], res[0]['lat'], false);
+        map = new Map("map", res[0]['lon'], res[0]['lat'], 25, false);
     } else {
         map.updateMap(res[0]['lon'], res[0]['lat']);
     }

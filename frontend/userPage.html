@@ -14,7 +14,7 @@
  </div>
     <div class="center">
       <div>
-        <h1>Events</h1>
+        <h1>Your Events</h1>
         <ul id="events_list">
         </ul>
     </div>
@@ -124,7 +124,10 @@
                 li.innerHTML= element;
                 li.appendChild(span)
                 orgs.appendChild(li)
-                li.onclick= ()=>{}
+                li.style.cursor = "pointer"
+                li.onclick= ()=>{
+                  window.location.href = "/joinEvent/" + element
+                }
             });
           }
     }

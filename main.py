@@ -49,6 +49,10 @@ def userPage():
 def eventCreation():
    return render_template('eventCreation.html')
 
+@app.route('/joinEvent/<string:org>', methods=['GET', 'POST'])
+def joinEvent(org):
+   return render_template('joinEvent.html',org=org)
+
 
 
 
