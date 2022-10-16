@@ -42,6 +42,8 @@ We organized webpages inside by head, body, and script codes. Scripts are writte
 
 below is a overall implemetation of the backend system with the API calls and database sets
 
+
+
 ### API calls
 
 **_Auth_**
@@ -69,9 +71,15 @@ GET user/\<id> _-> gets user info_
 
 ## Environment variables
 AWS_ACCESS_KEY="[AWS KEY]"
+
 AWS_SECRET_KEY="[AWS secret KEY]"
+
 JWT_SALT='SALT'
+
 JWT_SALT_TWO='SALT_TWO'
+
+
+## Overall Variables
 
 **_User_**
 -Email/username (KEY)
