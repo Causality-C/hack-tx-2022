@@ -4,7 +4,7 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiZ2VvcmdlazcyMiIsImEiOiJjbDlhaG05aG0waGJjM3hxd
 
 class Map {
 
-    constructor(containerName, lat, long, callback){
+    constructor(containerName, long, lat, callback){
         this.map = new mapboxgl.Map({
             container: containerName, // container id
             // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
