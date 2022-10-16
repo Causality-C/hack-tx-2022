@@ -5,6 +5,7 @@ import hashlib
 from flask import Blueprint, jsonify, request
 from dotenv import load_dotenv
 import os
+from auth import tokenRequired
 
 load_dotenv()
 SALT = os.environ["JWT_SALT_TWO"]
@@ -90,14 +91,23 @@ def orgTokenRequired(f):
 
     return decorated
 
-@organization.get("/")
-@orgTokenRequired
-def getStupid(orgname):
-    return "HELLO" 
+@organization.post("/<string:orgname>")
+@tokenRequired
+def subToOrganization(username,orgname):
+    org = org_table.get_item(Key={"orgname":orgname})
+    if "Item" not in org:
+        return jsonify({"msg": "Org does not exist"}), 404
+    else:
+        org = org['Item']
+    pass
 
 @organization.get("/dump")
 def dumpOrganizationDatabase():
+    def without(d, key):
+        new_d = d.copy()
+        new_d.pop(key)
+        return new_d
     res = org_table.scan()['Items']
-    res = 
+    res = [without(d,"password") for d in res]
     return res
 
