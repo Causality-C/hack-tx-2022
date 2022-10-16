@@ -77,6 +77,7 @@ def createEvent(organization):
         "organization": organization,
         "users_checked": [],
         "uid": str(uid),
+        "radius": req['radius'] # Radius in meters
     }
 
     event_table.put_item(Item=event)

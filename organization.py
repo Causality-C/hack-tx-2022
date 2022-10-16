@@ -1,5 +1,5 @@
 import functools
-from aws import org_table
+from aws import org_table, user_table,event_table
 import jwt 
 import hashlib
 from flask import Blueprint, jsonify, request
@@ -91,6 +91,7 @@ def orgTokenRequired(f):
 
     return decorated
 
+# sub to an organization from a user
 @organization.post("/<string:orgname>")
 @tokenRequired
 def subToOrganization(username,orgname):
@@ -99,7 +100,27 @@ def subToOrganization(username,orgname):
         return jsonify({"msg": "Org does not exist"}), 404
     else:
         org = org['Item']
-    pass
+    user = user_table.get_item(Key={"username": username})['Item']
+    org = org_table.get_item(Key={"orgname": orgname})['Item']
+    user['subbed_orgs'].append(orgname)
+    org['subbed_users'].append(username)
+    print(org['subbed_users'])
+
+    # TODO: get validation that user is not alrady subbed
+    success = user_table.update_item(
+            Key={"username": username},
+            UpdateExpression="SET subbed_orgs=:new_orgs",
+            ExpressionAttributeValues={":new_orgs": user['subbed_orgs']},
+            ReturnValues="UPDATED_NEW",
+    )
+    success = org_table.update_item(
+            Key={"orgname": orgname},
+            UpdateExpression="SET subbed_users=:new_users",
+            ExpressionAttributeValues={":new_users": org['subbed_users']},
+            ReturnValues="UPDATED_NEW",
+    )
+    return jsonify({"msg":"SUCCESS"})
+
 
 @organization.get("/dump")
 def dumpOrganizationDatabase():
@@ -110,4 +131,19 @@ def dumpOrganizationDatabase():
     res = org_table.scan()['Items']
     res = [without(d,"password") for d in res]
     return res
+
+
+@organization.get("/users")
+@tokenRequired
+def getOrganizationsByUser(username):
+    req =user_table.get_item(Key={"username":username})['Item']
+    return req['subbed_orgs']
+
+# Get the event details given an event id
+@organization.get("/event/<string:uid>")
+@orgTokenRequired
+def getID(orgname,uid):
+    res = event_table.get_item(Key={"uid": uid})['Item']
+    return res
+
 

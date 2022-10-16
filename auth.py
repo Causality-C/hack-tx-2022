@@ -123,8 +123,7 @@ def login():
     return jsonify({"username": username, "email": email, "token": token, "profile_pic" : profile_pic, "subbed_events" : subbed_events, "subbed_orgs" : subbed_orgs})
 
 
-@auth.route("/protected", methods=["POST"])
+@auth.get("/protected")
 @tokenRequired
 def protected(username):
-    print(username)
-    return "HELL World"
+    return user_table.get_item(Key={"username":username})['Item']['subbed_orgs']
