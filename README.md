@@ -67,6 +67,12 @@ GET user/\<id> _-> gets user info_
 
 ### Database
 
+## Environment variables
+AWS_ACCESS_KEY="[AWS KEY]"
+AWS_SECRET_KEY="[AWS secret KEY]"
+JWT_SALT='SALT'
+JWT_SALT_TWO='SALT_TWO'
+
 **_User_**
 -Email/username (KEY)
 -Password
