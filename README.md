@@ -57,16 +57,24 @@ below is a overall implemetation of the backend system with the API calls and da
 
 **_Auth_**
 POST*Login() *-> Sends a login request*
+
 POST_register() *-> Sends a register request\_
 
 **_Events_**
 GET events/\<org> _-> list org events_
+
 GET events/\<id> _-> returns event keyed by ID_
+
 GET events/\<username> _-> returns events user is_ _signed up for_
+
 POST events _-> calls create event_
+
 POST event/sub/\<id> _-> registering to an event_
+
 POST events/checkin/\<id> _-> check into an event_
+
 DELETE events/\<id> _-> Delete event_
+
 
 **_Organization_**
 GET organization/\<orgName> *-> *returns info of* \<orgName>*
@@ -92,25 +100,40 @@ JWT_SALT_TWO='SALT_TWO'
 
 **_User_**
 -Email/username (KEY)
+
 -Password
+
 -subbed_orgs \<List>
+
 -subbed_events \<List>
+
 
 **_Organization_**
 -email / organization_name
+
 -password
+
 -events -> [uids]
+
 -subbed_users
 
 **_Event_**
 -Location -> (latitude, longitude)
+
 -time_start
+
 -time_end
+
 -description
+
 -organization
+
 -users_checked_in
+
 -uid
+
 -prompt (after check in)
+
 -event_name
 
 ### Noteworthy Things for Database
